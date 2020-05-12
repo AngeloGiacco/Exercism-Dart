@@ -1,0 +1,7 @@
+name: "isogram"
+environment:
+  sdk: ">=2.0.0 <3.0.0"
+dev_dependencies:
+  test: "<2.0.0"
+dependencies:
+  validators: ^2.0.0 # change to latest version
