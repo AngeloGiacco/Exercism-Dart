@@ -1,17 +1,14 @@
 class WordCount {
   // Put your code here
   Map<String, int> countWords(String text) {
-    Map<String, int> word_ct = new Map();
-    var exp = new RegExp(r"\w+(\'\w+)?");
+    final wordCount = <String, int>{};
+    RegExp exp = RegExp(r"\w+(\'\w+)?");
     Iterable<RegExpMatch> matches = exp.allMatches(text);
-    for (RegExpMatch match in matches) {
-      String word = match.group(0).toLowerCase();
-      if (word_ct.containsKey(word)) {
-        word_ct[word] += 1;
-      } else {
-        word_ct[word] = 1;
-      }
-    }
-    return word_ct;
+    matches.fold(
+        0,
+        (dynamic a, b) => wordCount
+          ..update(b.group(0).toLowerCase(), (value) => value + 1,
+              ifAbsent: () => 1));
+    return wordCount;
   }
 }
