@@ -1,13 +1,11 @@
 class WordCount {
-  // Put your code here
+  final _exp = RegExp(r"\w+(\'\w+)?");
   Map<String, int> countWords(String text) {
-    final wordCount = <String, int>{};
-    RegExp exp = RegExp(r"\w+(\'\w+)?");
-    Iterable<RegExpMatch> matches = exp.allMatches(text);
-    return matches.fold<Map<String, int>>(
-        wordCount,
-        (a, b) => wordCount
-          ..update(b.group(0).toLowerCase(), (value) => value + 1,
-              ifAbsent: () => 1));
+    return _exp
+        .allMatches(text)
+        .map((match) => match.group(0).toLowerCase())
+        .fold<Map<String, int>>({}, _updateCount);
   }
+  Map<String, int> _updateCount(Map<String, int> wordCount, String word) =>
+      wordCount..update(word, (value) => ++value, ifAbsent: () => 1);
 }
